@@ -1,0 +1,79 @@
+<script>
+function makeid() {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < 6; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
+ function readData(user){
+            regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+            if (regexp.test(user))
+            {
+              if (!user.match(/^http?:\/\//i) && !user.match(/^https?:\/\//i)) {
+                user = 'http://' + user;
+              }
+              window.location.href=user;
+            }
+            document.getElementById("exampleFormControlTextarea3").value = user;
+ 
+            if(user.type=="user") {
+                $("#msg_console").append("<div id='out_name'>"+user.name+"</div>"+"<div id='out_msg'>"+user.message+"<br>"+"<div class='downtimer'>"+user.time+"<br>"+user.date);   
+            } else {
+                    $("#msg_console").append("<div id='sys_msg'>"+user.message);
+                    callback(n,grp);
+            }
+ }
+  var realId = makeid();
+  var dataBox = document.getElementById("getdata");
+  document.getElementById("myId").innerHTML = "Code is: "+realId;
+  document.getElementById("qr").src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=s2b_"+realId+"&chld=H|0";
+  var peer = new Peer(realId); 
+  peer.on('connection', function(conn) {
+    conn.on('data', function(data){
+      // Will print 'hi!'
+      console.log(data);
+      dataBox.style.display = "block";
+      readData(data);
+    });
+  });
+</script>
+<div self="size-xxlarge center" layout="rows stretch-center" class="list">
+<div class="container">
+
+    <div class="jumbotron" style="text-align: center;">
+      <p class="lead">Read Qr to Send Text</p>
+      <p> <img id="qr" src="http://chart.apis.google.com/chart?cht=qr&amp;chs=300x300&amp;chl=test&amp;chld=H|0" alt="QR Code">
+          </p>
+        <span id="myId"></span>
+    </div>
+
+    <div class="row marketing">
+      <div class="col-lg-12">
+
+              <div id="getdata" class="form-group">
+                      <label for="exampleFormControlTextarea3">Get Text:</label>
+                      <textarea class="form-control" id="exampleFormControlTextarea3" rows="7"></textarea>
+                    </div>
+                    <p><a href="https://chrome.google.com/webstore/detail/send2browser/dhnofaebmfjgmknpgapcngenfhgbggcc" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/benjaminoakes/TabCarousel/develop/resources/ChromeWebStore_BadgeWBorder_v2_206x58.png" alt="Send2Browser on Chrome Webstore" width="206" height="58"></a><a href="https://play.google.com/store/apps/details?id=com.mucanwork.send2browser" target="_blank" rel="noopener"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Send2Browser on Google Playstore" width="191" height="74"></a></p>
+                    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <ins class="adsbygoogle" style="display: block; text-align: center; height: 169px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-2650385612922429" data-ad-slot="3200748802" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:169px;margin:0;padding:0;position:relative;visibility:visible;width:676px;background-color:transparent;" tabindex="0" title="Advertisement" aria-label="Advertisement"><ins id="aswift_1_anchor" style="display:block;border:none;height:169px;margin:0;padding:0;position:relative;visibility:visible;width:676px;background-color:transparent;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:676px;height:169px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="676" height="169" frameborder="0" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-2650385612922429&amp;output=html&amp;h=169&amp;slotname=3200748802&amp;adk=3717413618&amp;adf=1119259538&amp;pi=t.ma~as.3200748802&amp;w=676&amp;fwrn=4&amp;lmt=1616516849&amp;rafmt=11&amp;psa=0&amp;format=676x169&amp;url=https%3A%2F%2Fhappy-newton-ba2b2a.netlify.app%2F&amp;flash=0&amp;wgl=1&amp;dt=1616516849282&amp;bpp=1&amp;bdt=80&amp;idt=6&amp;shv=r20210318&amp;cbv=r20190131&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=371778052157&amp;frm=20&amp;pv=1&amp;ga_vid=504699504.1616516849&amp;ga_sid=1616516849&amp;ga_hid=319390358&amp;ga_fc=0&amp;rplot=4&amp;u_tz=180&amp;u_his=10&amp;u_java=0&amp;u_h=1050&amp;u_w=1680&amp;u_ah=1050&amp;u_aw=1680&amp;u_cd=24&amp;u_nplug=1&amp;u_nmime=3&amp;adx=502&amp;ady=955&amp;biw=1680&amp;bih=970&amp;scr_x=0&amp;scr_y=0&amp;eid=44737458%2C44739387&amp;oid=3&amp;pvsid=3938334945010212&amp;pem=960&amp;ref=https%3A%2F%2Fhappy-newton-ba2b2a.netlify.app%2Fsend2phone&amp;rx=0&amp;eae=0&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1680%2C0%2C1680%2C1050%2C1680%2C970&amp;vis=1&amp;rsz=%7C%7CeE%7C&amp;abl=CS&amp;pfx=0&amp;fu=8320&amp;bc=31&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;xpc=NsBXUgBn3z&amp;p=https%3A//happy-newton-ba2b2a.netlify.app&amp;dtd=13" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!2" data-load-complete="true"></iframe></ins></ins></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+      </div>
+    </div>
+
+    <footer class="footer">
+        <hr>
+      <p style="text-align:left;">
+        © MucanWork 2021
+        <span style="float:right;"><a class="text-muted" href="/privacy">Privacy</a></span>
+        </p>
+      </footer>
+
+  </div>
+</div>
